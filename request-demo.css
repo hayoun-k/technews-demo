@@ -29,7 +29,13 @@
 }
 
 /*  for browser test */
-body {
+/* body {
+  margin: 0;
+  padding: 0;
+} */
+
+/* When global settings set, this will be overriden */
+:where(body) :where(.demo-form-page) {
   margin: 0;
   padding: 0;
 }
@@ -227,9 +233,9 @@ body {
 }
 
 /* When input is focused or has content */
-input:focus + .form-label,
+.demo-form-page :is(input:focus + .form-label,
 input:not(:placeholder-shown) + .form-label,
-select:focus + .form-label {
+select:focus + .form-label) {
   top: 4px;
   left: 4px;
   transform: translateY(0%);
@@ -238,7 +244,7 @@ select:focus + .form-label {
 }
 
 /* For select dropdown, we need to handle the selected state differently */
-select:valid + .form-label {
+.demo-form-page :is(select:valid + .form-label) {
   top: 4px;
   left: 4px;
   transform: translateY(0%);
@@ -246,19 +252,24 @@ select:valid + .form-label {
   color: var(--clr-primary);
 }
 
-select {
+.demo-form-page select {
   color: #666;
 }
 
-select:valid {
+.demo-form-page select:valid {
   color: var(--clr-border);
 }
 
-select option[value=""] {
+.demo-form-page select option[value=""] {
   color: #666;
 }
 
-label:has(#subscribe) {
+.demo-form-page select hr {
+  color: var(--clr-gray);
+  border-top: 1px solid var(--clr-gray);
+}
+
+.demo-form-page label:has(#subscribe) {
   padding-top: 8px;
   color: var(--clr-darkgray);
   display: flex;
@@ -267,7 +278,7 @@ label:has(#subscribe) {
   gap: 8px;
 }
 
-input.demo-button {
+.demo-form-page input.demo-button {
   width: 100%;
   margin-block: 24px;
   padding: 1.125rem 1.5rem;
@@ -320,6 +331,10 @@ input.demo-button {
   max-width: 100%;
   max-height: 75px;
   filter: brightness(0) invert(1);
+}
+
+#sf {
+  filter: none;
 }
 
 @media screen and (width > 800px) {
